@@ -21,19 +21,17 @@ Fighter::~Fighter()
 }
 
 void Fighter::IntroduceYourself()
-{
-    std::cout << this->name << std::endl << std::endl << this->ability << std::endl;
-    std::cout << "-----------------" << std::endl;
+{   // TODO: Formatting
+    std::cout << this->name << std::endl << this->ability << std::endl;
     std::cout << "HP:  " << this->healthPoints << std::endl;
     std::cout << "ATK: " << this->offensePoints << std::endl;
     std::cout << "DEF: " << this->defensePoints << std::endl;
     std::cout << "-----------------" << std::endl;
 }
 
-void Fighter::OutputStats()
+void Fighter::giveName(std::string &name)
 {
-    std::cout << this->name <<  " HP:  " << this->healthPoints << std::endl;
-    std::cout << "-----------------" << std::endl;
+    this->name = name;
 }
 
 bool Fighter::isAlive()
@@ -83,9 +81,9 @@ int Fighter::DefensiveDamage()
  * =====================
  */
 
-Warrior::Warrior(std::string &name)
+Warrior::Warrior()
 {
-    this->name = name;
+    this->name = "Warrior";
     this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
     this->healthPoints = 130;
     this->offensePoints = 30;   // testing
@@ -112,9 +110,9 @@ int Warrior::OffensiveDamage()
  * =====================
  */
 
-Ninja::Ninja(std::string &name)
+Ninja::Ninja()
 {
-    this->name = name;
+    this->name = "Ninja";
     this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
     this->healthPoints = 130;
     this->offensePoints = 30;   // testing

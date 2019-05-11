@@ -1,29 +1,31 @@
-//
 // Created by Philip Ewert on 2019-05-09.
 // Copyright (c) 2019 ewandos. All rights reserved.
 //
 
 #ifndef FIGHTCLUB_FIGHTER_H
 #define FIGHTCLUB_FIGHTER_H
+
 #include <iostream>
 #include <cstdlib>  // for rand()
 
-class Fighter
+#define FIGHTER_COUNT 2
+#define FIGHTER_ARR {new Warrior(), new Ninja()}
+
+class Fighter   // base Class for all Fighters
 {
 public:
     Fighter();
     virtual ~Fighter();
-    void IntroduceYourself();
-    void OutputStats();
+    void IntroduceYourself();   // prints all you have to know about the fighter
 
     std::string name;
     std::string ability;
-    int healthPoints; // public for testing
+    int healthPoints; // is public for testing
 
+    void giveName(std::string &name);
     void Fights(Fighter *Enemy);
     bool isAlive();
     virtual void ReceiveDamage(int damage); // how char deals with incoming damage?
-
 protected:
 
     int offensePoints;
@@ -35,10 +37,14 @@ protected:
     virtual int DefensiveDamage();    // how char calc dealing defense damage?
 };
 
+/*
+ * ALL TYPES OF FIGHTERS
+ */
+
 class Warrior : public Fighter
 {
 public:
-    Warrior(std::string &name);
+    Warrior();
     ~Warrior();
 
 protected:
@@ -48,7 +54,7 @@ protected:
 class Ninja : public Fighter
 {
 public:
-    Ninja(std::string &name);
+    Ninja();
     ~Ninja();
 
 protected:
