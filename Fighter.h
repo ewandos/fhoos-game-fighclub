@@ -37,8 +37,9 @@ protected:
     virtual int DefensiveDamage();    // how char calc dealing defense damage?
 };
 
-/*
- * ALL TYPES OF FIGHTERS
+/* W A R R I O R
+ * The warrior is a brave fighter that sometimes can attack very strongly
+ * (one by six chance of double hitpoints)
  */
 
 class Warrior : public Fighter
@@ -51,10 +52,17 @@ protected:
     int OffensiveDamage() override;
 };
 
+/* N I N J A
+ * Ninjas move very fast, hence they can escape attacks sometimes
+ * but still launch a counterattack
+ * (one by six chance that an attack does not cause any damage)
+ */
+
 class Ninja : public Fighter
 {
 public:
     Ninja();
+
     ~Ninja();
 
 protected:

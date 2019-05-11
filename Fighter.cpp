@@ -21,7 +21,7 @@ Fighter::~Fighter()
 }
 
 void Fighter::IntroduceYourself()
-{   // TODO: Formatting
+{
     std::cout << this->name << std::endl << this->ability << std::endl;
     std::cout << "HP:  " << this->healthPoints << std::endl;
     std::cout << "ATK: " << this->offensePoints << std::endl;
