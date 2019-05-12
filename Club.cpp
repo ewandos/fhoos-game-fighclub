@@ -16,24 +16,24 @@ Club::~Club()
     }
 }
 
-void Club::GrandPrix(Fighter *f1, Fighter *f2, int)
+void Club::Standoff(Fighter *f1, Fighter *f2, int rounds)
 {
     int f1Wins = 0;
     int f2Wins = 0;
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < rounds; i++)
     {
-        while (f1->isAlive() && f2->isAlive())
+        while (f1->CanFight() && f2->CanFight())
         {
             f1->Fights(f2);
             f2->Fights(f1);
         }
 
-        f1Wins += f1->isAlive();
-        f2Wins += f2->isAlive();
+        f1Wins += f1->CanFight();
+        f2Wins += f2->CanFight();
 
-        f1->healthPoints = 100;
-        f2->healthPoints = 100;
+        f1->ResetStats();
+        f2->ResetStats();
     }
 
     std::cout << f1->name << ":" << f1Wins << std::endl;

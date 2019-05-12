@@ -8,8 +8,8 @@
 #include <iostream>
 #include <cstdlib>  // for rand()
 
-#define FIGHTER_COUNT 2
-#define FIGHTER_ARR {new Warrior(), new Ninja()}
+#define FIGHTER_COUNT 4
+#define FIGHTER_ARR {new Warrior(), new Ninja(), new Pacifist(), new Cursed()}
 
 class Fighter   // base Class for all Fighters
 {
@@ -20,16 +20,21 @@ public:
 
     std::string name;
     std::string ability;
-    int healthPoints; // is public for testing
+
+    int healthPoints; //vvv is public for testing
+    int maxHealthPoints;
+    int offensePoints;
+    int maxOffensePoints;
+    int defensePoints;
+    int maxDefensePoints; //^^^
+
+    bool CanFight();
 
     void giveName(std::string &name);
     void Fights(Fighter *Enemy);
-    bool isAlive();
+    void ResetStats();
     virtual void ReceiveDamage(int damage); // how char deals with incoming damage?
 protected:
-
-    int offensePoints;
-    int defensePoints;
 
     virtual void SpecialAttack(Fighter *Enemy); // specifies the Fights Move
     virtual void SpecialDefense(Fighter *Enemy);    // specifies the Defense Move
@@ -62,10 +67,39 @@ class Ninja : public Fighter
 {
 public:
     Ninja();
-
     ~Ninja();
 
 protected:
+    void ReceiveDamage(int damage) override;
+};
+
+/* P A C I F I S T
+ * Talks to enemy until he/she gives up.
+ * (doesn't deal damage, he just reduces Enemies offensePoints)
+ */
+
+class Pacifist : public Fighter
+{
+public:
+    Pacifist();
+    ~Pacifist();
+
+protected:
+    void SpecialAttack(Fighter *Enemy) override;
+};
+
+/* C U R S E D
+ * Turns into zombie after death.
+ */
+
+class Cursed : public Fighter
+{
+public:
+    Cursed();
+    ~Cursed();
+
+protected:
+    bool isZombie;
     void ReceiveDamage(int damage) override;
 };
 

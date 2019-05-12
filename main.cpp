@@ -15,10 +15,9 @@ int main()
     Club *Fightclub = new Club();
 
     // TODO: Choose Fighters by just referring the pointers to blank objects
-    Fighter *f1 = Fightclub->Fighters[0];
-    Fighter *f2 = Fightclub->Fighters[1];
+    Fighter *f1 = Fightclub->Fighters[2];
+    Fighter *f2 = Fightclub->Fighters[3];
 
-    Fightclub->GrandPrix(f1, f2, 100);
-
+    Fightclub->Standoff(f1, f2, 1000);
     return 0;
 }

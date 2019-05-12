@@ -34,17 +34,17 @@ void Fighter::giveName(std::string &name)
     this->name = name;
 }
 
-bool Fighter::isAlive()
+bool Fighter::CanFight()
 {
-    return this->healthPoints > 0;
+    return this->healthPoints > 0 && this->offensePoints > 0;
 }
 
 void Fighter::Fights(Fighter *Enemy)
 {
-    if (this->isAlive())
+    if (this->CanFight())
         this->SpecialAttack(Enemy);
 
-    if (Enemy->isAlive())
+    if (Enemy->CanFight())
         Enemy->SpecialDefense(this);
 }
 
@@ -67,12 +67,25 @@ void Fighter::SpecialDefense(Fighter *Enemy)
 
 int Fighter::OffensiveDamage()
 {
-    return this->offensePoints + rand() % (this->offensePoints / 2);
+    if (this->offensePoints != 0)
+        return this->offensePoints + rand() % this->offensePoints;
+    else
+        return 0;
 }
 
 int Fighter::DefensiveDamage()
 {
-    return this->defensePoints + rand() % (this->defensePoints / 2);
+    if (this->defensePoints != 0)
+        return this->defensePoints + rand() % this->defensePoints;
+    else
+        return 0;
+}
+
+void Fighter::ResetStats()
+{
+    this->healthPoints = this->maxHealthPoints;
+    this->offensePoints = this->maxOffensePoints;
+    this->defensePoints = this->maxDefensePoints;
 }
 
 /*
@@ -85,9 +98,15 @@ Warrior::Warrior()
 {
     this->name = "Warrior";
     this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
-    this->healthPoints = 130;
-    this->offensePoints = 30;   // testing
-    this->defensePoints = 10;   // testing
+
+    this->maxHealthPoints = 100;
+    this->maxOffensePoints = 13;
+    this->maxDefensePoints = 13;
+
+    this->healthPoints = this->maxHealthPoints;
+    this->offensePoints = this->maxOffensePoints;
+    this->defensePoints = this->maxDefensePoints;
+
 }
 
 Warrior::~Warrior()
@@ -97,7 +116,7 @@ Warrior::~Warrior()
 
 int Warrior::OffensiveDamage()
 {
-    int damage = this->offensePoints + rand() % (this->offensePoints / 2);
+    int damage = this->offensePoints + rand() % this->offensePoints;
     if (rand()%6 == 0)
         return damage * 2;
     else
@@ -114,9 +133,14 @@ Ninja::Ninja()
 {
     this->name = "Ninja";
     this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
-    this->healthPoints = 130;
-    this->offensePoints = 30;   // testing
-    this->defensePoints = 10;   // testing
+
+    this->maxHealthPoints = 100;
+    this->maxOffensePoints = 18;
+    this->maxDefensePoints = 5;
+
+    this->healthPoints = this->maxHealthPoints;
+    this->offensePoints = this->maxOffensePoints;
+    this->defensePoints = this->maxDefensePoints;
 }
 
 Ninja::~Ninja()
@@ -131,4 +155,75 @@ void Ninja::ReceiveDamage(int damage)
 }
 
 
+
+/*
+ * =====================
+ *  P A C I F I S T
+ * =====================
+ */
+
+Pacifist::Pacifist()
+{
+    this->name = "Pacifist";
+    this->ability = "Talks to enemy until he/she gives up.";
+
+    this->maxHealthPoints = 100;
+    this->maxOffensePoints = 3;
+    this->maxDefensePoints = 0;
+
+    this->healthPoints = this->maxHealthPoints;
+    this->offensePoints = this->maxOffensePoints;
+    this->defensePoints = this->maxDefensePoints;
+}
+
+Pacifist::~Pacifist()
+{
+    std::cout << this->name << " is dead." << std::endl;
+}
+
+void Pacifist::SpecialAttack(Fighter *Enemy)
+{
+    int damage = this->OffensiveDamage();
+    Enemy->offensePoints -= damage;
+}
+
+
+
+/*
+ * =====================
+ *  C U R S E D
+ * =====================
+ */
+
+Cursed::Cursed()
+{
+    this->name = "Cursed";
+    this->ability = "Turns into zombie after death.";
+
+    this->maxHealthPoints = 100;
+    this->maxOffensePoints = 25;
+    this->maxDefensePoints = 5;
+
+    this->healthPoints = this->maxHealthPoints;
+    this->offensePoints = this->maxOffensePoints;
+    this->defensePoints = this->maxDefensePoints;
+
+    this->isZombie = false;
+}
+
+Cursed::~Cursed()
+{
+    std::cout << this->name << " is dead." << std::endl;
+}
+
+void Cursed::ReceiveDamage(int damage)
+{
+    this->healthPoints -= damage;
+    if (this->healthPoints <= 0 && !this->isZombie)
+    {
+        this->name = "Zombie";
+        this->isZombie = true;
+        this->healthPoints = maxHealthPoints / 2;
+    }
+}
 

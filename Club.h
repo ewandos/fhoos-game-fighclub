@@ -14,7 +14,7 @@ public:
     ~Club();
     Fighter* Fighters[FIGHTER_COUNT] = FIGHTER_ARR;
 
-    void GrandPrix(Fighter*, Fighter*, int);
+    void Standoff(Fighter *f1, Fighter *f2, int rounds);
     void OutputFighter();
 
 private:
