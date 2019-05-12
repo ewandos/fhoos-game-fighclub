@@ -22,11 +22,10 @@ Fighter::~Fighter()
 
 void Fighter::IntroduceYourself()
 {
-    std::cout << this->name << std::endl << this->ability << std::endl;
-    std::cout << "HP:  " << this->healthPoints << std::endl;
-    std::cout << "ATK: " << this->offensePoints << std::endl;
+    std::cout << "The " << this->name << std::endl << this->ability << std::endl;
+    std::cout << "HP:  " << this->healthPoints << "  |  ";
+    std::cout << "ATK: " << this->offensePoints << "  |  ";
     std::cout << "DEF: " << this->defensePoints << std::endl;
-    std::cout << "-----------------" << std::endl;
 }
 
 void Fighter::giveName(std::string &name)
@@ -97,7 +96,7 @@ void Fighter::ResetStats()
 Warrior::Warrior()
 {
     this->name = "Warrior";
-    this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
+    this->ability = "Strikes hard, sometimes even harder.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 13;
@@ -132,7 +131,7 @@ int Warrior::OffensiveDamage()
 Ninja::Ninja()
 {
     this->name = "Ninja";
-    this->ability = "By a little chance, the warrior hits critically which deals doubled damage.";
+    this->ability = "You will regret trying to hit him.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 18;
@@ -198,7 +197,7 @@ void Pacifist::SpecialAttack(Fighter *Enemy)
 Cursed::Cursed()
 {
     this->name = "Cursed";
-    this->ability = "Turns into zombie after death.";
+    this->ability = "You always meet twice.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 25;

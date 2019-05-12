@@ -11,7 +11,7 @@
 #define FIGHTER_COUNT 4
 #define FIGHTER_ARR {new Warrior(), new Ninja(), new Pacifist(), new Cursed()}
 
-class Fighter   // base Class for all Fighters
+class Fighter   // base Class for all ClubbedFighters
 {
 public:
     Fighter();
@@ -30,14 +30,14 @@ public:
 
     bool CanFight();
 
-    void giveName(std::string &name);
-    void Fights(Fighter *Enemy);
+    void giveName(std::string&);
+    void Fights(Fighter*);
     void ResetStats();
-    virtual void ReceiveDamage(int damage); // how char deals with incoming damage?
+    virtual void ReceiveDamage(int ); // how char deals with incoming damage?
 protected:
 
-    virtual void SpecialAttack(Fighter *Enemy); // specifies the Fights Move
-    virtual void SpecialDefense(Fighter *Enemy);    // specifies the Defense Move
+    virtual void SpecialAttack(Fighter*); // specifies the Fights Move
+    virtual void SpecialDefense(Fighter*);    // specifies the Defense Move
     virtual int OffensiveDamage();   // how char calc dealing attack damage?
     virtual int DefensiveDamage();    // how char calc dealing defense damage?
 };
@@ -70,7 +70,7 @@ public:
     ~Ninja();
 
 protected:
-    void ReceiveDamage(int damage) override;
+    void ReceiveDamage(int) override;
 };
 
 /* P A C I F I S T
@@ -85,7 +85,7 @@ public:
     ~Pacifist();
 
 protected:
-    void SpecialAttack(Fighter *Enemy) override;
+    void SpecialAttack(Fighter*) override;
 };
 
 /* C U R S E D
@@ -100,7 +100,7 @@ public:
 
 protected:
     bool isZombie;
-    void ReceiveDamage(int damage) override;
+    void ReceiveDamage(int) override;
 };
 
 #endif //FIGHTCLUB_FIGHTER_H

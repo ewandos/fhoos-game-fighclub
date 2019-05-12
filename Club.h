@@ -12,13 +12,13 @@ class Club
 public:
     Club();
     ~Club();
-    Fighter* Fighters[FIGHTER_COUNT] = FIGHTER_ARR;
+    Fighter* ClubbedFighters[FIGHTER_COUNT] = FIGHTER_ARR;
 
-    void Standoff(Fighter *f1, Fighter *f2, int rounds);
-    void OutputFighter();
+    void StartFight(Fighter**);
 
 private:
-
+    void IntroduceFighters();
+    void Standoff(Fighter *, Fighter *, int);
 };
 
 
