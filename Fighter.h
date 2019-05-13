@@ -8,8 +8,8 @@
 #include <iostream>
 #include <cstdlib>  // for rand()
 
-#define FIGHTER_COUNT 4
-#define FIGHTER_ARR {new Warrior(), new Ninja(), new Pacifist(), new Cursed()}
+#define FIGHTER_TYPES_COUNT 4
+#define FIGHTER_TYPES_ARR {new Warrior(), new Ninja(), new Pacifist(), new Cursed()}
 
 class Fighter   // base Class for all ClubbedFighters
 {
