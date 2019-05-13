@@ -15,10 +15,10 @@ public:
     Fighter* ClubbedFighters[FIGHTER_COUNT] = FIGHTER_ARR;
 
     void StartFight(Fighter**);
-
+    void Standoff(Fighter *, Fighter *, int);
 private:
     void IntroduceFighters();
-    void Standoff(Fighter *, Fighter *, int);
+
 };
 
 

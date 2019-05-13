@@ -13,8 +13,9 @@
 int main()
 {
     Club *Fightclub = new Club();
-    Fighter *Fighters[2];
-    Fightclub->StartFight(Fighters);
-    delete Fightclub;
+    Fighter* f1 = new Cursed();
+    Fighter* f2 = new Pacifist();
+
+    Fightclub->Standoff(f1, f2, 1000);
     return 0;
 }
