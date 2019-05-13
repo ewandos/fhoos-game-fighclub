@@ -6,57 +6,14 @@
 
 Club::Club()
 {
-    this->customFighterCount = 0;
-
-    for (int i = 0; i < MAX_CUSTOM_FIGHTERS; i++)
-    {
-        this->CustomFighters[i] = nullptr;
-    }
 }
 
 Club::~Club()
 {
-    for (int i = 0; i < FIGHTER_TYPES_COUNT; i++)
+    for (int i = 0; i < FIGHTER_COUNT; i++)
     {
-        delete this->FighterTypes[i];
+        delete this->ClubbedFighters[i];
     }
-
-    for (int i = 0; i < MAX_CUSTOM_FIGHTERS; i++)
-    {
-        if (this->CustomFighters[i] != nullptr)
-            delete this->CustomFighters[i];
-    }
-}
-
-void Club::CreateFighter()
-{
-    std::cout << "---- CREATE FIGHTER ----" << std::endl;
-
-    for (int i = 0; i < FIGHTER_TYPES_COUNT; i++)
-    {
-        std::cout << "[" << i << "] " << this->FighterTypes[i]->name << std::endl;
-    }
-
-    int input = -1;
-    while (1602)
-    {
-        if (input >= 0 && input < FIGHTER_TYPES_COUNT)
-        {
-            std::string name = "";
-            std::cout << "Enter a nickname: ";
-            std::cin >> name;
-
-            Fighter f = *this->FighterTypes[input];
-            f.giveName(name);
-            Fighter *pointer = &f;
-
-            this->CustomFighters[customFighterCount] = pointer;
-            this->customFighterCount++;
-            break;
-        }
-    }
-
-    std::cout << "Pick a type:" << std::endl;
 }
 
 void Club::Standoff(Fighter *f1, Fighter *f2, int rounds)
@@ -85,9 +42,9 @@ void Club::Standoff(Fighter *f1, Fighter *f2, int rounds)
 
 void Club::IntroduceFighters()
 {
-    for (int i = 0; i < FIGHTER_TYPES_COUNT; i++)
+    for (int i = 0; i < FIGHTER_COUNT; i++)
     {   std::cout << std::endl << "NUMBER " << i+1 << " ================" << std::endl;
-        FighterTypes[i]->IntroduceYourself();
+        ClubbedFighters[i]->IntroduceYourself();
     }
     std::cout << std::endl;
 }
@@ -102,9 +59,9 @@ void Club::StartFight(Fighter** Fighters)
     {
         std::cout << "Choose your first Fighter: ";
         std::cin >> firstInput;
-        if (firstInput <= FIGHTER_TYPES_COUNT && firstInput > 0)
+        if (firstInput <= FIGHTER_COUNT && firstInput > 0)
         {
-            Fighters[0] = this->FighterTypes[firstInput - 1];
+            Fighters[0] = this->ClubbedFighters[firstInput - 1];
             break;
         }
     }
@@ -114,9 +71,9 @@ void Club::StartFight(Fighter** Fighters)
     {
         std::cout << "Choose your second Fighter: ";
         std::cin >> secondInput;
-        if (secondInput <= FIGHTER_TYPES_COUNT && secondInput > 0 && secondInput != firstInput)
+        if (secondInput <= FIGHTER_COUNT && secondInput > 0 && secondInput != firstInput)
         {
-            Fighters[1] = this->FighterTypes[secondInput - 1];
+            Fighters[1] = this->ClubbedFighters[secondInput - 1];
             break;
         }
     }

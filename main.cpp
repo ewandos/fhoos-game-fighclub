@@ -13,8 +13,8 @@
 int main()
 {
     Club *Fightclub = new Club();
-    Fightclub->StartFight(<#Fighter**#>)
-
+    Fighter *Fighters[2];
+    Fightclub->StartFight(Fighters);
     delete Fightclub;
     return 0;
 }
