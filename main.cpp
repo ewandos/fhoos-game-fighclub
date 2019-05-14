@@ -7,15 +7,15 @@
 //
 // TODO: Validation for Character Name Length before construction
 
+#ifndef TESTS
+
 #include <iostream>
 #include "Club.h"
 
 int main()
 {
-    Club *Fightclub = new Club();
-    Fighter* f1 = new Cursed();
-    Fighter* f2 = new Pacifist();
 
-    Fightclub->Standoff(f1, f2, 1000);
     return 0;
 }
+
+#endif
