@@ -2,14 +2,14 @@
 // Copyright (c) 2019 ewandos. All rights reserved.
 //
 
-#ifndef FIGHTCLUB_FIGHTER_H
-#define FIGHTCLUB_FIGHTER_H
+#ifndef FIGHTCLUB_FIGHTERS_H
+#define FIGHTCLUB_FIGHTERS_H
 
 #include <iostream>
 #include <cstdlib>  // for rand()
 
-#define FIGHTER_COUNT 4
-#define FIGHTER_ARR {new Warrior(), new Ninja(), new Pacifist(), new Cursed()}
+#define FIGHTER_TYPES_COUNT 4
+#define FIGHTER_TYPES_ARR {new Warrior(), new Ninja()}  // TODO: add other types
 
 class Fighter   // base Class for all ClubbedFighters
 {
@@ -19,7 +19,14 @@ public:
     void IntroduceYourself();   // prints all you have to know about the fighter
 
     std::string name;
-    std::string ability;
+    std::string description;
+
+
+    bool dead = false; // FOR TESTS
+    void attack(Fighter&); // TESTS
+    double specialAttack(); // FOR TESTS
+    double specialDefense();    // FOR TESTS
+
 
     int healthPoints; //vvv is public for testing
     int maxHealthPoints;
@@ -33,7 +40,7 @@ public:
     void giveName(std::string&);
     void Fights(Fighter*);
     void ResetStats();
-    virtual void ReceiveDamage(int ); // how char deals with incoming damage?
+    virtual void ReceiveDamage(int); // how char deals with incoming damage?
 protected:
 
     virtual void SpecialAttack(Fighter*); // specifies the Fights Move
@@ -41,6 +48,9 @@ protected:
     virtual int OffensiveDamage();   // how char calc dealing attack damage?
     virtual int DefensiveDamage();    // how char calc dealing defense damage?
 };
+
+void lastManStanding(Fighter**); // FOR TESTS
+void fight(Fighter**, int, int);    // FOR TESTS
 
 /* W A R R I O R
  * The warrior is a brave fighter that sometimes can attack very strongly
@@ -51,6 +61,7 @@ class Warrior : public Fighter
 {
 public:
     Warrior();
+    Warrior(std::string name); // FOR TESTS
     ~Warrior();
 
 protected:
@@ -67,6 +78,7 @@ class Ninja : public Fighter
 {
 public:
     Ninja();
+    Ninja(std::string name);   // FOR TESTS
     ~Ninja();
 
 protected:
@@ -76,7 +88,7 @@ protected:
 /* P A C I F I S T
  * Talks to enemy until he/she gives up.
  * (doesn't deal damage, he just reduces Enemies offensePoints)
- */
+
 
 class Pacifist : public Fighter
 {
@@ -87,10 +99,11 @@ public:
 protected:
     void SpecialAttack(Fighter*) override;
 };
+  */
 
 /* C U R S E D
  * Turns into zombie after death.
- */
+
 
 class Cursed : public Fighter
 {
@@ -102,5 +115,7 @@ protected:
     bool isZombie;
     void ReceiveDamage(int) override;
 };
+ */
+
 
 #endif //FIGHTCLUB_FIGHTER_H
