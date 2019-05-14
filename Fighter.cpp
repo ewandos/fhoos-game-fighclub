@@ -2,7 +2,7 @@
 // Copyright (c) 2019 ewandos. All rights reserved.
 //
 
-#include "fighters.h"
+#include "Fighter.h"
 
 /*
  * =====================
@@ -22,7 +22,7 @@ Fighter::~Fighter()
 
 void Fighter::IntroduceYourself()
 {
-    std::cout << "The " << this->name << std::endl << this->description << std::endl;
+    std::cout << "The " << this->name << std::endl << this->ability << std::endl;
     std::cout << "HP:  " << this->healthPoints << "  |  ";
     std::cout << "ATK: " << this->offensePoints << "  |  ";
     std::cout << "DEF: " << this->defensePoints << std::endl;
@@ -87,68 +87,6 @@ void Fighter::ResetStats()
     this->defensePoints = this->maxDefensePoints;
 }
 
-void Fighter::attack(Fighter &Enemy)    // FOR TESTS
-{
-    if (!this->dead && !Enemy.dead)
-    {
-        int damage = (rand() % this->offensePoints) * (int)this->specialAttack() * (int)Enemy.specialDefense();
-        Enemy.healthPoints -= damage;
-        if (this->healthPoints <= 0)
-            this->dead = true;
-        if (Enemy.healthPoints <= 0)
-            this->dead = true;
-    }
-}
-
-double Fighter::specialAttack() // FOR TESTS
-{
-    return 1;
-}
-
-double Fighter::specialDefense()    // FOR TESTS
-{
-    return 1;
-}
-
-void fight(Fighter** Fighter, int i1, int i2)   // FOR TESTS
-{
-    while (!Fighter[i1]->dead && !Fighter[i2]->dead)
-    {
-        Fighter[i1]->attack(*Fighter[i2]);
-        Fighter[i2]->attack(*Fighter[i1]);
-    }
-
-    if (Fighter[i1]->dead)
-    {
-        Fighter[i2]->healthPoints = 1;
-        delete Fighter[i1];
-        Fighter[i1] = nullptr;
-    }
-
-    if (Fighter[i2]->dead)
-    {
-        Fighter[i1]->healthPoints = 1;
-        delete Fighter[i2];
-        Fighter[i2] = nullptr;
-    }
-}
-
-void lastManStanding(Fighter** Fighters)    // FOR TESTS
-{
-    /*
-    int number = sizeof(Fighters) / sizeof(Fighters);
-    std::cout << "GROESSE DES ARRAYS: " << number;
-    for (int i = 1; i < number; i++)
-    {
-        delete Fighters[i];
-        Fighters[i] = nullptr;
-    }
-     */
-
-    delete Fighters[0];
-    Fighters[0] = nullptr;
-}
-
 /*
  * =====================
  *  W A R R I O R
@@ -158,7 +96,7 @@ void lastManStanding(Fighter** Fighters)    // FOR TESTS
 Warrior::Warrior()
 {
     this->name = "Warrior";
-    this->description = "Strikes hard, sometimes even harder.";
+    this->ability = "Strikes hard, sometimes even harder.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 13;
@@ -172,7 +110,7 @@ Warrior::Warrior()
 
 Warrior::~Warrior()
 {
-    //std::cout << this->name << " is dead." << std::endl;
+    std::cout << this->name << " is dead." << std::endl;
 }
 
 int Warrior::OffensiveDamage()
@@ -184,20 +122,6 @@ int Warrior::OffensiveDamage()
         return damage;
 }
 
-Warrior::Warrior(std::string name) // FOR TESTS
-{
-    this->name = name;
-    this->description = "You will regret trying to hit him.";
-
-    this->maxHealthPoints = 100;
-    this->maxOffensePoints = 25;
-    this->maxDefensePoints = 25;
-
-    this->healthPoints = this->maxHealthPoints;
-    this->offensePoints = this->maxOffensePoints;
-    this->defensePoints = this->maxDefensePoints;
-}
-
 /*
  * =====================
  *  N I N J A
@@ -207,7 +131,7 @@ Warrior::Warrior(std::string name) // FOR TESTS
 Ninja::Ninja()
 {
     this->name = "Ninja";
-    this->description = "You will regret trying to hit him.";
+    this->ability = "You will regret trying to hit him.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 18;
@@ -218,23 +142,9 @@ Ninja::Ninja()
     this->defensePoints = this->maxDefensePoints;
 }
 
-Ninja::Ninja(std::string name)  // FOR TESTS
-{
-    this->name = name;
-    this->description = "You will regret trying to hit him.";
-
-    this->maxHealthPoints = 100;
-    this->maxOffensePoints = 25;
-    this->maxDefensePoints = 25;
-
-    this->healthPoints = this->maxHealthPoints;
-    this->offensePoints = this->maxOffensePoints;
-    this->defensePoints = this->maxDefensePoints;
-}
-
 Ninja::~Ninja()
 {
-    //std::cout << this->name << " is dead." << std::endl;
+    std::cout << this->name << " is dead." << std::endl;
 }
 
 void Ninja::ReceiveDamage(int damage)
@@ -244,16 +154,17 @@ void Ninja::ReceiveDamage(int damage)
 }
 
 
+
 /*
  * =====================
  *  P A C I F I S T
  * =====================
-
+ */
 
 Pacifist::Pacifist()
 {
     this->name = "Pacifist";
-    this->description = "Talks to enemy until he/she gives up.";
+    this->ability = "Talks to enemy until he/she gives up.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 3;
@@ -275,18 +186,18 @@ void Pacifist::SpecialAttack(Fighter *Enemy)
     Enemy->offensePoints -= damage;
 }
 
- */
+
 
 /*
  * =====================
  *  C U R S E D
  * =====================
-
+ */
 
 Cursed::Cursed()
 {
     this->name = "Cursed";
-    this->description = "You always meet twice.";
+    this->ability = "You always meet twice.";
 
     this->maxHealthPoints = 100;
     this->maxOffensePoints = 25;
@@ -314,4 +225,4 @@ void Cursed::ReceiveDamage(int damage)
         this->healthPoints = maxHealthPoints / 2;
     }
 }
- */
+

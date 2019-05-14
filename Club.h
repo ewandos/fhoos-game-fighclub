@@ -5,23 +5,20 @@
 #ifndef FIGHTCLUB_CLUB_H
 #define FIGHTCLUB_CLUB_H
 
-#include "fighters.h"
-#define MAX_CUSTOM_FIGHTERS 20
+#include "Fighter.h"
 
 class Club
 {
 public:
     Club();
     ~Club();
-    Fighter* FighterTypes[FIGHTER_TYPES_COUNT] = FIGHTER_TYPES_ARR;
-    Fighter* CustomFighters[MAX_CUSTOM_FIGHTERS];
-    void StartFight(Fighter**);
-    void CreateFighter();
+    Fighter* ClubbedFighters[FIGHTER_COUNT] = FIGHTER_ARR;
 
-private:
-    int customFighterCount;
+    void StartFight(Fighter**);
     void Standoff(Fighter *, Fighter *, int);
+private:
     void IntroduceFighters();
+
 };
 
 
