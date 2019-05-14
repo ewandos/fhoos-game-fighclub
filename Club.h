@@ -5,7 +5,7 @@
 #ifndef FIGHTCLUB_CLUB_H
 #define FIGHTCLUB_CLUB_H
 
-#include "fighters.h"
+#include "Fighter.h"
 #define MAX_CUSTOM_FIGHTERS 20
 
 class Club

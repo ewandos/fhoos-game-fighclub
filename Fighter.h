@@ -2,8 +2,8 @@
 // Copyright (c) 2019 ewandos. All rights reserved.
 //
 
-#ifndef FIGHTCLUB_FIGHTERS_H
-#define FIGHTCLUB_FIGHTERS_H
+#ifndef FIGHTCLUB_FIGHTER_H
+#define FIGHTCLUB_FIGHTER_H
 
 #include <iostream>
 #include <cstdlib>  // for rand()
@@ -20,12 +20,6 @@ public:
 
     std::string name;
     std::string description;
-
-
-    bool dead = false; // FOR TESTS
-    void attack(Fighter&); // TESTS
-    double specialAttack(); // FOR TESTS
-    double specialDefense();    // FOR TESTS
 
 
     int healthPoints; //vvv is public for testing
@@ -49,9 +43,6 @@ protected:
     virtual int DefensiveDamage();    // how char calc dealing defense damage?
 };
 
-void lastManStanding(Fighter**); // FOR TESTS
-void fight(Fighter**, int, int);    // FOR TESTS
-
 /* W A R R I O R
  * The warrior is a brave fighter that sometimes can attack very strongly
  * (one by six chance of double hitpoints)
@@ -61,7 +52,6 @@ class Warrior : public Fighter
 {
 public:
     Warrior();
-    Warrior(std::string name); // FOR TESTS
     ~Warrior();
 
 protected:
@@ -78,7 +68,6 @@ class Ninja : public Fighter
 {
 public:
     Ninja();
-    Ninja(std::string name);   // FOR TESTS
     ~Ninja();
 
 protected:
@@ -88,7 +77,7 @@ protected:
 /* P A C I F I S T
  * Talks to enemy until he/she gives up.
  * (doesn't deal damage, he just reduces Enemies offensePoints)
-
+*/
 
 class Pacifist : public Fighter
 {
@@ -99,11 +88,11 @@ public:
 protected:
     void SpecialAttack(Fighter*) override;
 };
-  */
+
 
 /* C U R S E D
  * Turns into zombie after death.
-
+ */
 
 class Cursed : public Fighter
 {
@@ -115,7 +104,7 @@ protected:
     bool isZombie;
     void ReceiveDamage(int) override;
 };
- */
+
 
 
 #endif //FIGHTCLUB_FIGHTER_H
